@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACIENTE</title>
+</head>
+
+<body onload="listarPaciente()" class="body1">
+    <title>Gestion de info - Pacientes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/front-end/css/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center my-4"><b>Gestion de info - Pacientes</b></h1>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h2>Registro Pacientes</h2>
+                    <button type="button" class="btn btn-secondary mb-3" data-toggle="modal"
+                        data-target="#userModal" onclick="registrarPaciente(); limpiar();">Registrar paciente</button>
+                    <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Desabilitar Usuario</button>
+                    <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Editar Usuario</button>
+                    <a class="btn btn-secondary mb-3" href="/front-end/inicio.html">Inicio </a>
+                    <table id="userTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Documento de Identidad</th>
+                                <th>Primer Nombre</th>
+                                <th>Segundo Nombre</th>
+                                <th>Primer Apellido</th>
+                                <th>Segundo Apellido</th>
+                                <th>Celular</th>
+                                <th>Correo</th>
+                                <th>Nombre Persona Contacto</th>
+                                <th>Telefono Persona Contacto</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí se mostrarán los pacientes registrados -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userModalLabel">Registrar Nuevo Paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="userForm">
+                            <div class="form-group">
+                                <label for="id">ID:</label>
+                                <input type="text" id="id" name="id" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="document">Documento de Identidad:</label>
+                                <input type="text" id="document" name="document" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">Primer Nombre:</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="firstName">Segundo Nombre:</label>
+                                <input type="text" id="secondName" name="secondName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Primer Apellido:</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="secondLastName">Segundo Apellido:</label>
+                                <input type="text" id="secondLastName" name="secondLastName" class="form-control"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Celular:</label>
+                                <input type="text" id="phone" name="phone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo:</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact">Nombre Persona Contacto:</label>
+                                <input type="text" id="contact" name="contact" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phonecontact">Telefono Persona Contacto:</label>
+                                <input type="text" id="phonecontact" name="phonecontact" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="scrip2.js"></script>
+
+    </body>
+
+</html>

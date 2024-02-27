@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INGRESO</title>
+    <link rel="stylesheet" href="/front-end/css/style.css">
+</head>
+
+
+<body onload="listarIngreso()" class="body1">
+    <title>Ingresos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center my-4"><b>Ingresos</b></h1>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h2>Registro Ingresos</h2>
+                    <button type="button" class="btn btn-secondary mb-3" data-toggle="modal"
+                        data-target="#userModal" onclick="registrarIngreso(); limpiar();">Registrar Ingresos</button>
+                    <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Editar Usuario</button>
+                    <a class="btn btn-secondary mb-3" href="/front-end/inicio.html">Inicio </a>
+                    <table id="userTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Habitacion</th>
+                                <th>Cama</th>
+                                <th>Paciente</th>
+                                <th>Medico</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Fecha Salida</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí se mostrarán los ingresos de los pacientes -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userModalLabel">Registrar Nuevo Paciente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="userForm">
+                            <div class="form-group">
+                                <label for="id">ID:</label>
+                                <input type="text" id="id" name="id" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="room">Habitacion:</label>
+                                <input type="text" id="room" name="room" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bed">Cama:</label>
+                                <input type="text" id="bed" name="bed" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Paciente:</label>
+                                <input type="text" id="Name" name="Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="medical name">Medico:</label>
+                                <input type="text" id="medical name" name="medical name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Admission date
+                                ">Fecha Ingreso:</label>
+                                <input type="text" id="Admission date
+                                " name="Admission date
+                                " class="form-control"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Departure date
+                                ">Fecha Salida:</label>
+                                <input type="text" id="Departure date
+                                " name="Departure date
+                                " class="form-control" required>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        
+
+    </body>
+
+</html>

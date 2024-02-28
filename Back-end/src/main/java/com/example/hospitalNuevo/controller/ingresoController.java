@@ -68,8 +68,8 @@ public class ingresoController {
 
     @GetMapping("/")
     public ResponseEntity<Object> findAll() {
-        var listaIngreso = ingresoService.findAll();
-        return new ResponseEntity<>(listaIngreso, HttpStatus.OK);
+        var listaingreso = ingresoService.findAll();
+        return new ResponseEntity<>(listaingreso, HttpStatus.OK);
     }
 
     @GetMapping("/busquedafiltro/{filtro}")

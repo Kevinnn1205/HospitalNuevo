@@ -1,6 +1,7 @@
 //se almacena la url de la API
-var url = "http://localhost:8080/api/v1/medico/";
-function listarMedico() {
+let url = "http://localhost:8080/api/v1/medico/";
+
+function ListarMedico() {
     //metodo para alistar los medicos
     //se crea la peticion AJAX
     $.ajax({
@@ -12,38 +13,38 @@ function listarMedico() {
             console.log(result);
             //se crea un objeto que contenga
             //el cuerpo de la tabla
-            var cuerpoTabla = document.getElementById("cuerpoTabla");
+            let cuerpoTabla = document.getElementById("cuerpoTabla");
             //se limpia el cuerpo de la tabla
             cuerpoTabla.innerHTML = "";
             //Se hace un ciclo que recorra 
             //el arreglo con los datos
-            for (var i = 0; i < result.length; i++) {
+            for (const element of result) {
                 //se crea una etiqueta tr por
                 //cada registro
-                var trRegistro = document.createElement("tr");
+                let trRegistro = document.createElement("tr");
                 let celdaId = document.createElement("td");
 
                 //creamos un td por cada campo de registro
 
-                let celdaDocumentoIdentidad = document.createElement("td");
-                let celdaPrimerNombre = document.createElement("td");
-                let celdaSegundoNombre = document.createElement("td");
-                let celdaPrimerApellido = document.createElement("td");
-                let celdaSegundoApellido = document.createElement("td");
+                let celdaDocumento_identidad = document.createElement("td");
+                let celdaPrimer_nombre = document.createElement("td");
+                let celdaSegundo_nombre = document.createElement("td");
+                let celdaPrimer_apellido = document.createElement("td");
+                let celdaSegundo_apellido = document.createElement("td");
                 let celdaCelular = document.createElement("td");
                 let celdaCorreo = document.createElement("td");
                 let celdaEstado = document.createElement("td");
 
-                celdaId.innerText = result[i]["id_medico"];
+                celdaId.innerText = element["id_medico"];
                
                 //se agrega la celda al registro una linea por cada campo 
 
                 trRegistro.appendChild(celdaId);
-                trRegistro.appendChild(celdaDocumentoIdentidad);
-                trRegistro.appendChild(celdaPrimerNombre);
-                trRegistro.appendChild(celdaSegundoNombre);
-                trRegistro.appendChild(celdaPrimerApellido);
-                trRegistro.appendChild(celdaSegundoApellido);
+                trRegistro.appendChild(celdaDocumento_identidad);
+                trRegistro.appendChild(celdaPrimer_nombre);
+                trRegistro.appendChild(celdaSegundo_nombre);
+                trRegistro.appendChild(celdaPrimer_apellido);
+                trRegistro.appendChild(celdaSegundo_apellido);
                 trRegistro.appendChild(celdaTelefono);
                 trRegistro.appendChild(celdaCorreo);
                 trRegistro.appendChild(celdaEstado);
@@ -51,14 +52,14 @@ function listarMedico() {
                 //se agrega el registro en la tabla 
 
                 cuerpoTabla.appendChild(trRegistro);
-                celdaDocumentoIdentidad.innerText = result[i]["documento_identidad"];
-                celdaPrimerNombre.innerText = result[i]["primer_nombre"];
-                celdaSegundoNombre.innerText = result[i]["segundo_nombre"];
-                celdaPrimerApellido.innerText = result[i][" primer_apellido"];
-                celdaSegundoApellido.innerText = result[i]["segundo_apellido"];
-                celdaCelular.innerText = result[i]["telefono"];
-                celdaCorreo.innerText = result[i]["correo"];
-                celdaEstado.innerText = result[i]["estado"];
+                celdaDocumento_identidad.innerText = element["documento_identidad"];
+                celdaPrimer_nombre.innerText = element["primer_nombre"];
+                celdaSegundo_nombre.innerText = element["segundo_nombre"];
+                celdaPrimer_apellido.innerText = element[" primer_apellido"];
+                celdaSegundo_apellido.innerText = element["segundo_apellido"];
+                celdaCelular.innerText = element["telefono"];
+                celdaCorreo.innerText = element["correo"];
+                celdaEstado.innerText = element["estado"];
 
 
 
@@ -107,7 +108,7 @@ function registrarMedico() {
 
 //Validar campo de documento de identidad paciente
 function validarCampos() {
-    var cama = document.getElementById("documento_identidad");
+    let cama = document.getElementById("documento_identidad");
     return validarDocumentoIdentidad(cama);
 }
 
@@ -115,8 +116,8 @@ function validarDocumentoIdentidad(cuadroNumero) {
 
 
 
-    var valor = cuadroNumero.value;
-    var valido = true;
+    let valor = cuadroNumero.value;
+    let valido = true;
     if (valor.length <= 1 || valor.length > 11) {
         valido = false;
     }

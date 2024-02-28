@@ -12,6 +12,9 @@ import com.example.hospitalNuevo.model.ingreso;
 @Repository
 public interface Iingreso extends CrudRepository< ingreso , String>{
 
-    @Query ("SELECT m FROM Ingreso m WHERE m.habitacion LIKE %?1%")
+    @Query ("SELECT m FROM ingreso m WHERE m.habitacion LIKE %?1% OR m.fecha_ingreso = %?1%")
      List<ingreso>filtroIngreso(String filtro);
-}
+     
+    @Query ("SELECT m FROM ingreso m.estado LIKE %?1%")
+    List<ingreso>filtroIngreso(char estado);     
+}  

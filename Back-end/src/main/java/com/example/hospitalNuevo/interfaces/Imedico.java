@@ -14,6 +14,9 @@ public interface Imedico extends CrudRepository< medico , String>{
     
 
     //?1 es la primera variable (?2,?3 y asi sucesivamente)
-    @Query("SELECT m FROM Medico m WHERE m.primerNombre LIKE %?1% OR m.documentoIdentidad LIKE %?2% OR m.Estado LIKE %?3%")
+    @Query("SELECT m FROM medico m WHERE m.primer_nombre LIKE %?1% OR m.documento_identidad LIKE %?1%")
     List<medico> filtroMedico(String filtro);
+    
+    @Query("SELECT m FROM medico m WHERE m.estado LIKE %?1%")
+    List<medico> filtroMedico(char estado);
 }

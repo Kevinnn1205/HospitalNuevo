@@ -14,7 +14,10 @@ public interface Ipaciente extends CrudRepository< paciente , String>{
 
     // ?1 es la primera variable
 
-    @Query("SELECT m FROM paciente m WHERE m.primer_nombre LIKE %?1%")
+    @Query("SELECT m FROM paciente m WHERE m.primer_nombre LIKE %?1% OR documento_identidad LIKE %?1%")
     List<paciente>filtroPaciente(String filtro);
+    
+    @Query("SELECT m FROM paciente m WHERE m.estado LIKE %?1%")
+    List<paciente>filtropaciente(char estado);
     
 }

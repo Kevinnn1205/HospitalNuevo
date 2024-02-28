@@ -1,5 +1,5 @@
 //se almacena la url de la API
-var url = "http://localhost:8080/api/v1/ingreso/";
+let url = "http://localhost:8080/api/v1/ingreso/";
 function listarIngreso() {
     //metodo para alistar los medicos
     //se crea la peticion AJAX
@@ -12,53 +12,55 @@ function listarIngreso() {
             console.log(result);
             //se crea un objeto que contenga
             //el cuerpo de la tabla
-            var cuerpoTabla = document.getElementById("cuerpoTabla");
+            let cuerpoTabla = document.getElementById("cuerpoTabla");
             //se limpia el cuerpo de la tabla
             cuerpoTabla.innerHTML = "";
             //Se hace un ciclo que recorra 
             //el arreglo con los datos
-            for (var i = 0; i < result.length; i++) {
+            for (const element of result) {
                 //se crea una etiqueta tr por
                 //cada registro
-                var trRegistro = document.createElement("tr");
+                let trRegistro = document.createElement("tr");
                 let celdaId = document.createElement("td");
 
                 //creamos un td por cada campo de registro
 
-                let celdaHabitacion = document.createElement("td");
-                let celdaCama = document.createElement("td");
-                let celdaPaciente = document.createElement("td");
-                let celdaMedico= document.createElement("td");
-                let celdaFechaIngreso = document.createElement("td");
-                let celdaFechaSalida = document.createElement("td");
-                let celdaEstado = document.createElement("td");
-                celdaId.innerText = result[i]["id_ingreso"];
+                let celdahabitacion = document.createElement("td");
+                let celdacama = document.createElement("td");
+                let celdapaciente = document.createElement("td");
+                let celdamedico= document.createElement("td");
+                let celdafecha_ingreso = document.createElement("td");
+                let celdafecha_salida = document.createElement("td");
+                let celdaestado = document.createElement("td");
+                celdaId.innerText = element["id_ingreso"];
                
                 //se agrega la celda al registro una linea por cada campo 
 
-                trRegistro.appendChild(celdaId);
-                trRegistro.appendChild(celdaHabitacion);
-                trRegistro.appendChild(celdaCama);
-                trRegistro.appendChild(celdaPaciente);
-                trRegistro.appendChild(celdaMedico);
-                trRegistro.appendChild(celdaFechaIngreso);
-                trRegistro.appendChild(celdaFechaSalida);
-                trRegistro.appendChild(celdaEstado);
+                trRegistro.appendChild(celdaid);
+                trRegistro.appendChild(celdahabitacion);
+                trRegistro.appendChild(celdacama);
+                trRegistro.appendChild(celdapaciente);
+                trRegistro.appendChild(celdamedico);
+                trRegistro.appendChild(celdfechaIngreso);
+                trRegistro.appendChild(celdafechaSalida);
+                trRegistro.appendChild(celdaestado);
                 
                 //se agrega el registro en la tabla 
 
                 cuerpoTabla.appendChild(trRegistro);
-                celdaHabitacion.innerText = result[i]["habitacion"];
-                celdaCama.innerText = result[i]["cama"];
-                celdaPaciente.innerText = result[i]["paciente"];
-                celdaMedico.innerText = result[i]["medico"];
-                celdaFechaIngreso.innerText = result[i]["fecha_ingreso"];
-                celdaFechaSalida.innerText = result[i]["fecha_salida"];
-                celdaEstado.innerText = result[i]["estado"];
+                celdahabitacion.innerText = element["habitacion"];
+                celdacama.innerText = element["cama"];
+                celdapaciente.innerText = element["paciente"];
+                celdamedico.innerText = element["medico"];
+                celdafecha_ingreso.innerText = element["fecha_ingreso"];
+                celdafecha_salida.innerText = element["fecha_salida"];
+                celdaEstado.innerText = element["estado"];
+                
 
 
 
             }
+        
         },
         error: function (error) {
             //error: funcion que se ejecuta 
@@ -102,7 +104,7 @@ function registrarIngreso() {
 
 //Validar campo de documento de identidad paciente
 function validarCampos() {
-    var cama = document.getElementById("cama");
+    let cama = document.getElementById("cama");
     return validarCama(cama);
 }
 
@@ -110,8 +112,8 @@ function validarCama(cuadroNumero) {
 
 
 
-    var valor = cuadroNumero.value;
-    var valido = true;
+    let valor = cuadroNumero.value;
+    let valido = true;
     if (valor.length <= 1 || valor.length > 11) {
         valido = false;
     }

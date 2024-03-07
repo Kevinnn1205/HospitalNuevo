@@ -27,12 +27,12 @@ public class medicoController {
     public ResponseEntity<Object> save(@ModelAttribute("medico") medico medico) {
 
         // verificar que no exista el documento de identidad
-        var listamedico = medicoService.findAll()
-                .stream().filter(Medico -> medico.getDocumento_identidad()
-                        .equals(medico.getDocumento_identidad()));
-        if (listamedico.count() != 0) {
-            return new ResponseEntity<>("El medico ya existe", HttpStatus.BAD_REQUEST);
-        }
+        // var listamedico = medicoService.findAll()
+        //         .stream().filter(Medico -> medico.getDocumento_identidad()
+        //                 .equals(medico.getDocumento_identidad()));
+        // if (listamedico.count() != 0) {
+        //     return new ResponseEntity<>("El medico ya existe", HttpStatus.BAD_REQUEST);
+        // }
         //verificar que el campo documento de identidad sea diferente vacio
         //Añadir campos obligatorios
         if (medico.getDocumento_identidad().equals("")) {
@@ -60,7 +60,7 @@ public class medicoController {
             return new ResponseEntity<>("La direccion de correo es un campo obligatorio", HttpStatus.BAD_REQUEST);
         }
         
-        // todo bien
+        
         medicoService.save(medico);
         return new ResponseEntity<>(medico, HttpStatus.OK);
 

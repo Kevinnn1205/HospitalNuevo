@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/front-end/css/style.css">
 </head>
 
-<body onload="ListarMedico()" class="body1">
+<body onload="ListarMedico();" class="body1">
     <div class="container">
 
 
@@ -18,13 +18,13 @@
         <div class="row mb-4">
             <div class="col-md-12">
                 <h2>Registros</h2>
-                <button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#userModal" onclick="registrarMedico();">Registar
+                <button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#userModal" onclick="limpiar()">Registar
                     Medicos</button>
                 <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Desabilitar Usuario</button>
                 <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Editar Usuario</button>
                 <a class="btn btn-secondary mb-3" href="/front-end/inicio.html">Inicio </a>
 
-                <table id="userTable" class="table table-bordered">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -36,7 +36,6 @@
                             <th>Celular</th>
                             <th>Correo</th>
                             <th>Estado</th>
-                            <th>opciones</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpoTabla">
@@ -61,7 +60,7 @@
                     <form id="userForm">
                         <div class="form-group">
                             <label for="documento_identidad">Documento de Identidad:</label>
-                            <input type="text" id="documento_identidad" name="documento_identidad" class="form-control"
+                            <input type="number" id="documento_identidad" class="form-control" onfocusout="validarDocumento_identidad(this)"
                                 required>
                         </div>
                         <div class="form-group">
@@ -92,12 +91,8 @@
                             <label for="estado">Estado:</label>
                             <input type="text" id="estado" name="estado" class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label for="opciones">Opciones:</label>
-                            <input type="text" id="opciones" name="opciones" class="form-control" required>
-                        </div>
                         
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="submit" class="btn btn-primary" onclick="registrarMedico(); limpiar()" >Registrar</button>
                     </form>
                 </div>
             </div>
@@ -107,7 +102,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./js/medico.js"></script>
+    <script src="/front-end/js/medico.js"></script>
 
 </body>
 

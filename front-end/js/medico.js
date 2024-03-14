@@ -1,78 +1,49 @@
 // se almacena la url de la API
 let url = "http://localhost:8080/api/v1/medico/";
 
-function ListarMedico() {
-    // método para alistar los médicos
-    // se crea la petición AJAX
+// Función para listar los médicos
+function listarMedico() {
     $.ajax({
         url: url,
         type: "GET",
         success: function (result) {
-            // success: función que se ejecuta 
-            // cuando la petición tiene éxito
-            console.log(result);
-            // se crea un objeto que contenga
-            // el cuerpo de la tabla
             let cuerpoTabla = document.getElementById("cuerpoTabla");
-            // se limpia el cuerpo de la tabla
             cuerpoTabla.innerHTML = "";
-            // Se hace un ciclo que recorra 
-            // el arreglo con los datos
-            for (const element of result) {
-                // se crea una etiqueta tr por
-                // cada registro
+
+            for (let i = 0; i < result.length; i++) {
                 let trRegistro = document.createElement("tr");
-                let celdaId = document.createElement("td");
+                trRegistro.innerHTML = `
+                    <td>${result[i]["id_medico"]}</td>
+                    <td class="text-center align-middle">${result[i]["documento_identidad"]}</td>
+                    <td class="text-center align-middle">${result[i]["primer_nombre"]}</td>
+                    <td class="text-center align-middle">${result[i]["segundo_nombre"]}</td>
+                    <td class="text-center align-middle">${result[i]["primer_apellido"]}</td>
+                    <td class="text-center align-middle">${result[i]["segundo_apellido"]}</td>
+                    <td class="text-center align-middle">${result[i]["celular"]}</td>
+                    <td class="text-center align-middle">${result[i]["correo"]}</td>
+                    <td class="text-center align-middle">${result[i]["estado"]}</td>
+                    <td class="text-center align-middle">
+    <button class="btn btn-link" data-toggle="modal" data-target="#userModal" onclick="registrarMedico();" data-id="${result[i]["id_medico"]}">Editar
+    </button>
+    <button class="btn btn-link" onclick="cambiarEstado(${result[i]["id_medico"]})" data-id="${result[i]["id_medico"]}">Desahabilitar
+    </button>
+</td>
 
-                // creamos un td por cada campo de registro
-
-                let celdaDocumento_identidad = document.createElement("td");
-                let celdaPrimer_nombre = document.createElement("td");
-                let celdaSegundo_nombre = document.createElement("td");
-                let celdaPrimer_apellido = document.createElement("td");
-                let celdaSegundo_apellido = document.createElement("td");
-                let celdaCelular = document.createElement("td");
-                let celdaCorreo = document.createElement("td");
-                let celdaEstado = document.createElement("td");
-
-                celdaId.innerText = element["id_medico"];
-
-                // se agrega la celda al registro una linea por cada campo 
-
-                trRegistro.appendChild(celdaId);
-                trRegistro.appendChild(celdaDocumento_identidad);
-                trRegistro.appendChild(celdaPrimer_nombre);
-                trRegistro.appendChild(celdaSegundo_nombre);
-                trRegistro.appendChild(celdaPrimer_apellido);
-                trRegistro.appendChild(celdaSegundo_apellido);
-                trRegistro.appendChild(celdaCelular);
-                trRegistro.appendChild(celdaCorreo);
-                trRegistro.appendChild(celdaEstado);
-
-                // se agrega el registro en la tabla 
-
+                `;
                 cuerpoTabla.appendChild(trRegistro);
-                celdaDocumento_identidad.innerText = element["documento_identidad"];
-                celdaPrimer_nombre.innerText = element["primer_nombre"];
-                celdaSegundo_nombre.innerText = element["segundo_nombre"];
-                celdaPrimer_apellido.innerText = element["primer_apellido"];
-                celdaSegundo_apellido.innerText = element["segundo_apellido"];
-                celdaCelular.innerText = element["celular"];
-                celdaCorreo.innerText = element["correo"];
-                celdaEstado.innerText = element["estado"];
             }
         },
         error: function (error) {
-            // error: función que se ejecuta 
-            // cuando la petición tiene un error
-            alert("Error en la petición " + error);
+            alert("Error en la petición: " + error);
         }
     });
 }
 
-// se almacenan los valores
+let registrarMedicoBandera = true;
+
+// Función para registrar un médico
 function registrarMedico() {
-    let formData = {
+    let forData = {
         "documento_identidad": document.getElementById("documento_identidad").value,
         "primer_nombre": document.getElementById("primer_nombre").value,
         "segundo_nombre": document.getElementById("segundo_nombre").value,
@@ -82,59 +53,150 @@ function registrarMedico() {
         "correo": document.getElementById("correo").value,
         "estado": document.getElementById("estado").value,
     };
+    let metodo = "";
+    let urlLocal = "";
+    let textoimprimir = "";
+    if (registrarMedicoBandera == true) {
+        metodo = "POST";
+        urlLocal = url;
+    } else {
+        metodo = "PUT";
+        urlLocal = url + id_medico;
+    }
     if (validarCampos()) {
-        // se ejecuta la petición
         $.ajax({
-            url: url,
-            type: "POST",
-            data: formData,
+            url: urlLocal,
+            type: metodo,
+            data: forData,
             success: function (result) {
-                alert("Registro exitoso");
-                // Limpiar el formulario después de un registro exitoso
-                limpiar();
-                // Actualizar la lista de médicos después del registro
-                ListarMedico();
+                $('#exampleModal').modal('hide');
+                listarMedico();
             },
-            error: function (xhr, status, error) {
-                // Mostrar mensaje de error detallado
-                alert("Error al guardar. Código de estado: " + xhr.status + ". Mensaje: " + xhr.responseText);
+            error: function (error) { // Aquí es donde se espera una variable "error"
+                if (error.responseJSON && error.responseJSON.message) {
+                } else {
+                    alert("Error al guardar: " + error.statusText);
+                }
             }
         });
+    } else {
     }
 }
 
 
-// Validar campo de documento de identidad paciente
+// Función para validar campos
 function validarCampos() {
-    let documento_identidad = document.getElementById("documento_identidad");
-    return validarDocumento_identidad(documento_identidad);
+    let documentoIdentidad = document.getElementById("documento_identidad");
+    return validarDocumentoIdentidad(documentoIdentidad);
 }
 
-function validarDocumento_identidad(cuadroNumero) {
+// Función para validar el documento de identidad
+function validarDocumentoIdentidad(cuadroNumero) {
     let valor = cuadroNumero.value;
     let valido = true;
-    if (valor.length <= 1 || valor.length > 11) {
+
+    if (valor.length < 5 || valor.length > 11) {
         valido = false;
     }
 
-    if (valido) {
-        // cuadro de texto cumple
-        // se modifica la clase del cuadro de texto
-        cuadroNumero.className = "form-control is-valid";
-    } else {
-        // cuadro de texto no cumple
-        cuadroNumero.className = "form-control is-invalid"
-    }
+
     return valido;
 }
 
+
+
+// Función para limpiar campos del formulario
 function limpiar() {
     document.getElementById("documento_identidad").value = "";
+    document.getElementById("documento_identidad").className="form-control";
     document.getElementById("primer_nombre").value = "";
+    document.getElementById("primer_nombre").className="form-control";
     document.getElementById("segundo_nombre").value = "";
     document.getElementById("primer_apellido").value = "";
+    document.getElementById("primer_apellido").className="form-control";
     document.getElementById("segundo_apellido").value = "";
     document.getElementById("celular").value = "";
+    document.getElementById("celular").className="form-control";
     document.getElementById("correo").value = "";
+    document.getElementById("correo").className="form-control";
     document.getElementById("estado").value = "";
+    document.getElementById("estado").className="form-control";
+}
+
+let id_medico = "";
+// Asociar eventos de clic a los iconos dentro de la tabla
+$(document).on("click", ".editar", function () {
+    limpiar();
+    id_medico = $(this).data("id");
+
+    $.ajax({
+        url: url + id_medico,
+        type: "GET",
+        success: function (medico) {
+            document.getElementById("documento_identidad").value = medico.documento_identidad;
+            document.getElementById("primer_nombre").value = medico.primer_nombre;
+            document.getElementById("segundo_nombre").value = medico.segundo_nombre;
+            document.getElementById("primer_apellido").value = medico.primer_apellido;
+            document.getElementById("segundo_apellido").value = medico.segundo_apellido;
+            document.getElementById("celular").value = medico.celular;
+            document.getElementById("correo").value = medico.correo;
+            document.getElementById("estado").value = medico.estado;
+            registrarMedicoBandera = false; // Cambiar la bandera a false para indicar que se está editando
+            $('#exampleModal').modal('show');
+        },
+        error: function (error) {
+            alert("Error al obtener los datos del médico: " + error.statusText);
+        }
+    });
+});
+
+// Función para editar un médico
+function editarMedico() {
+    let forData = {
+        "documento_identidad": document.getElementById("documento_identidad").value,
+        "primer_nombre": document.getElementById("primer_nombre").value,
+        "segundo_nombre": document.getElementById("segundo_nombre").value,
+        "primer_apellido": document.getElementById("primer_apellido").value,
+        "segundo_apellido": document.getElementById("segundo_apellido").value,
+        "celular": document.getElementById("celular").value,
+        "correo": document.getElementById("correo").value,
+        "estado": document.getElementById("estado").value,
+    };
+
+    $.ajax({
+        url: url + id_medico,
+        type: "PUT",
+        data: forData,
+        success: function (result) {
+            $('#exampleModal').modal('hide');
+            listarMedico();
+        },
+        error: function (error) {
+            alert("Error al actualizar el médico: " + error.statusText);
+        }
+    });
+}
+
+
+$(document).on("click", ".cambiarEstado", function () {
+    let id_medico = $(this).data("id");
+    $.ajax({
+        url: url + id_medico,
+        type: "DELETE",
+        success: function(){
+            
+            alert("Error al guardar: " + error.statusText);
+            listarMedico(); // Actualiza la lista de pacientes en el front-end
+        }
+    });
+});
+
+
+
+// Llamar a la función para listar médicos al cargar la página
+$(document).ready(function () {
+    listarMedico();
+});
+function actualizarlistarMedico() {
+    listarMedico();
 }

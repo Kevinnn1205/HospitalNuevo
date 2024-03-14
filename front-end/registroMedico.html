@@ -9,39 +9,35 @@
     <link rel="stylesheet" href="/front-end/css/style.css">
 </head>
 
-<body onload="ListarMedico();" class="body1">
+<body onload="listarMedico();" class="body1">
     <div class="container">
 
-
-        <h1 class="text-center my-2"><b>info  Medicos</b></h1>
+        <h1 class="text-center my-2"><b>Info Medicos</b></h1>
 
         <div class="row mb-4">
             <div class="col-md-12">
                 <h2>Registros</h2>
-                <button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#userModal" onclick="limpiar()">Registar
-                    Medicos</button>
-                <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Desabilitar Usuario</button>
-                <button type="button" class="btn btn-secondary mb-3" id="deleteSelectedBtn">Editar Usuario</button>
+                <button type="button" class="btn btn-secondary mb-3" data-toggle="modal" data-target="#userModal" onclick="limpiar(), registrarMedico();">Registrar Médicos</button>
                 <a class="btn btn-secondary mb-3" href="/front-end/inicio.html">Inicio </a>
 
-                <table class="table table-bordered">
-                    <thead>
+                <table class="  ">
+                    <div class="">
                         <tr>
-                            <th>ID</th>
-                            <th>Documento de Identidad</th>
-                            <th>Primer Nombre</th>
-                            <th>Segundo Nombre</th>
-                            <th>Primer Apellido</th>
-                            <th>Segundo Apellido</th>
-                            <th>Celular</th>
-                            <th>Correo</th>
-                            <th>Estado</th>
+                            <th class="">ID</th>
+                            <th class="">N° de documento</th>
+                            <th class="">Primer Nombre</th>
+                            <th class="">Segundo Nombre</th>
+                            <th class="">Primer Apellido</th>
+                            <th class="">Segundo Apellido</th>
+                            <th class="">Teléfono</th>
+                            <th class="">Correo</th>
+                            <th class="">Estado</th>
+                            <th class="">Opciones</th>
                         </tr>
-                    </thead>
-                    <tbody id="cuerpoTabla">
-                        <!-- Aquí se mostrarán los usuarios registrados -->
-                    </tbody>
-                </table>    
+                    </div>
+                    <tbody id="cuerpoTabla"></tbody>
+                    <!-- Las filas de la tabla se agregarán dinámicamente con JavaScript -->
+                </table>
             </div>
         </div>
     </div>
@@ -60,12 +56,11 @@
                     <form id="userForm">
                         <div class="form-group">
                             <label for="documento_identidad">Documento de Identidad:</label>
-                            <input type="number" id="documento_identidad" class="form-control" onfocusout="validarDocumento_identidad(this)"
-                                required>
+                            <input type="number" id="documento_identidad" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="Primer Nombre">Primer Nombre:</label>
-                            <input type="text" id="primer_nombre" name="primer_nombre" class="form-control" required>
+                            <input type="text" id="primer_nombre" name="primer_nombre" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="segundo_nombre">Segundo Nombre:</label>
@@ -73,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <label for="primer_apellido">Primer Apellido:</label>
-                            <input type="text" id="primer_apellido" name="primer_apellido" class="form-control" required>
+                            <input type="text" id="primer_apellido" name="primer_apellido" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="segundo_apellido">Segundo Apellido:</label>
@@ -81,18 +76,19 @@
                         </div>
                         <div class="form-group">
                             <label for="celular">Celular:</label>
-                            <input type="text" id="celular" name="celular" class="form-control" required>
+                            <input type="text" id="celular" name="celular" class="form-control" >
                         </div>
                         <div class="form-group">
                             <label for="correo">Correo:</label>
-                            <input type="email" id="correo" name="correo" class="form-control" required>
+                            <input type="email" id="correo" name="correo" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="estado">Estado:</label>
-                            <input type="text" id="estado" name="estado" class="form-control" required>
+                            <input type="text" id="estado" name="estado" class="form-control" >
                         </div>
                         
                         <button type="submit" class="btn btn-primary" onclick="registrarMedico(); limpiar()" >Registrar</button>
+
                     </form>
                 </div>
             </div>
@@ -103,7 +99,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/front-end/js/medico.js"></script>
-
 </body>
 
 </html>
